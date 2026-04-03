@@ -125,8 +125,9 @@ GEM
       minitest (>= 3.0)
     i18n (1.14.8)
       concurrent-ruby (~> 1.0)
-    importmap-rails (1.1.5)
+    importmap-rails (2.2.3)
       actionpack (>= 6.0.0)
+      activesupport (>= 6.0.0)
       railties (>= 6.0.0)
     io-console (0.8.2)
     irb (1.10.0)
@@ -391,7 +392,7 @@ DEPENDENCIES
   debug (= 1.7.1)
   guard (= 2.18.0)
   guard-minitest (= 2.4.6)
-  importmap-rails (= 1.1.5)
+  importmap-rails (= 2.2.3)
   irb (= 1.10.0)
   jbuilder (= 2.11.5)
   minitest (= 5.18.0)
@@ -456,7 +457,7 @@ CHECKSUMS
   guard-compat (1.2.1) sha256=3ad21ab0070107f92edfd82610b5cdc2fb8e368851e72362ada9703443d646fe
   guard-minitest (2.4.6) sha256=d89e83d029447c13b191599085d24b6e2fe61e402d275e46491cd3e82f561572
   i18n (1.14.8) sha256=285778639134865c5e0f6269e0b818256017e8cde89993fdfcbfb64d088824a5
-  importmap-rails (1.1.5) sha256=a53cf0257713221c0638c9b0039d0fa2d66ae04a52fb6164c30d29f83f8757fd
+  importmap-rails (2.2.3) sha256=7101be2a4dc97cf1558fb8f573a718404c5f6bcfe94f304bf1f39e444feeb16a
   io-console (0.8.2) sha256=d6e3ae7a7cc7574f4b8893b4fca2162e57a825b223a177b7afa236c5ef9814cc
   irb (1.10.0) sha256=b691c9308fbe1f9467e5518e3a7a1467b8cd2f0374994b0106cb4969151d0a16
   jaro_winkler (1.7.0) sha256=8daa05a5cd05bf7d27c1c65caa8ab0d47c05419d80210feaa17126db24044ada
