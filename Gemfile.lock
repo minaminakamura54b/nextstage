@@ -134,9 +134,9 @@ GEM
       rdoc
       reline (>= 0.3.8)
     jaro_winkler (1.7.0)
-    jbuilder (2.11.5)
-      actionview (>= 5.0.0)
-      activesupport (>= 5.0.0)
+    jbuilder (2.14.1)
+      actionview (>= 7.0.0)
+      activesupport (>= 7.0.0)
     json (2.19.3)
     kramdown (2.5.2)
       rexml (>= 3.4.4)
@@ -396,7 +396,7 @@ DEPENDENCIES
   guard-minitest (= 2.4.6)
   importmap-rails (= 1.1.5)
   irb (= 1.10.0)
-  jbuilder (= 2.11.5)
+  jbuilder (= 2.14.1)
   minitest (= 5.18.0)
   minitest-reporters (= 1.6.0)
   pg (= 1.3.5)
@@ -465,7 +465,7 @@ CHECKSUMS
   io-console (0.8.2) sha256=d6e3ae7a7cc7574f4b8893b4fca2162e57a825b223a177b7afa236c5ef9814cc
   irb (1.10.0) sha256=b691c9308fbe1f9467e5518e3a7a1467b8cd2f0374994b0106cb4969151d0a16
   jaro_winkler (1.7.0) sha256=8daa05a5cd05bf7d27c1c65caa8ab0d47c05419d80210feaa17126db24044ada
-  jbuilder (2.11.5) sha256=ea6234b334f4afc9205eaa136729da2904731ca01ff05d4db3173b70ebeba8c0
+  jbuilder (2.14.1) sha256=4eb26376ff60ef100cb4fd6fd7533cd271f9998327e86adf20fd8c0e69fabb42
   json (2.19.3) sha256=289b0bb53052a1fa8c34ab33cc750b659ba14a5c45f3fcf4b18762dc67c78646
   kramdown (2.5.2) sha256=1ba542204c66b6f9111ff00dcc26075b95b220b07f2905d8261740c82f7f02fa
   kramdown-parser-gfm (1.1.0) sha256=fb39745516427d2988543bf01fc4cf0ab1149476382393e0e9c48592f6581729
