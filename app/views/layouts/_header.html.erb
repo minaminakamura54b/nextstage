@@ -1,0 +1,34 @@
+
+<!-- Navbar -->
+  <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
+    <div class="container-fluid">
+      <!-- ロゴ -->
+      <%= link_to "https://rubyonrails.org/", class: "navbar-brand" do %>
+        <%= image_tag("rails.svg", alt: "Rails logo", width: "150") %>
+      <% end %>
+
+      <!-- ハンバーガーメニュー -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- ナビリンク（折りたたみ） -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item"><%= link_to "Home", root_path, class: "nav-link active", aria: { current: "page" } %></li>
+          <li class="nav-item"><%= link_to "About", about_path, class: "nav-link" %></li>
+          <li class="nav-item"><%= link_to "Help", help_path, class: "nav-link" %></li>
+          <li class="nav-item"><%= link_to "News", news_path, class: "nav-link" %></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main content -->
+  <div class="container" style="padding-top: 80px;">
+
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-jdSIJTK9l6XwXj3RixpVDXtMcA2bFd9O81RlLAwhpr2oXRqvQP88rr16IeFXTgFE" crossorigin="anonymous"></script>

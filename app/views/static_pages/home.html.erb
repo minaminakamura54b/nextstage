@@ -1,2 +1,8 @@
-<h1>Home</h1>
-<p>Find me in app/views/static_pages/home.html.erb</p>
+<div class="p-5 mb-4 bg-light rounded-3 text-center">
+  <h1 class="mb-4">Do you have an active @Kai_architect Login ID?</h1>
+
+  <div class="d-flex justify-content-center gap-3">
+    <%= link_to "Yes", signup_path, class: "btn btn-lg btn-outline-primary" %>
+    <%= link_to "Not yet", "#", class: "btn btn-lg btn-outline-primary" %>
+  </div>
+</div>
