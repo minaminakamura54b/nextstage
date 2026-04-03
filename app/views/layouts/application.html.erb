@@ -13,9 +13,16 @@
 
   <body>
   <%= render "layouts/header" %>
+  <% flash.each do |key, message| %>
+    <div class="alert alert-<%= key == "success" ? "success" : "danger" %> alert-dismissible fade show" role="alert">
+      <%= message %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  <% end %>
   <div class="container">
   <%= yield %>
   <%= render "layouts/footer" %>
+  <%= debug(params) if Rails.env.development? %>
   </div>
   </body>
 </html>

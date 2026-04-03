@@ -1,11 +1,10 @@
 Rails.application.routes.draw do
-  get '/signup', to: "users#new"
-  get '/show',   to: "users#show"
-  get '/index',  to: "users#index"
   root "static_pages#home"
   get '/help', to: "static_pages#help"
   get '/about', to: "static_pages#about"
   get '/news', to: "static_pages#news"
+  get '/signup', to: "users#new"
+  resources :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
