@@ -1,38 +1,36 @@
 @import "bootstrap";
 
-/* footer */
-
+/* ==========================
+   FOOTER（全ページ共通）
+   ========================== */
 footer {
-    margin-top: 45px;
-    padding-top: 5px;
-    border-top: 1px solid #eaeaea;
-    color: #777;
+  padding: 1rem 0;
+  border-top: 1px solid #eaeaea;
+  width: 100%;
+  text-align: center;
+  color: white;
+
+  a {
+    color: white;
+    &:hover { color: #222; }
   }
 
-  footer a {
-    color: #555;
-  }
+  small { float: left; }
 
-  footer a:hover {
-    color: #222;
-  }
-
-  footer small {
-    float: left;
-  }
-
-  footer ul {
+  ul {
     float: right;
     list-style: none;
+
+    li {
+      float: left;
+      margin-left: 15px;
+    }
   }
+}
 
-  footer ul li {
-    float: left;
-    margin-left: 15px;
-  }
-
-  /* miscellaneous */
-
+/* ==========================
+   MISCELLANEOUS
+   ========================== */
 .debug_dump {
   clear: both;
   float: left;
@@ -40,39 +38,111 @@ footer {
   margin-top: 45px;
 }
 
-/* sidebar */
-
+/* ==========================
+   SIDEBAR
+   ========================== */
 aside {
-  section.user_info {
-    margin-top: 20px;
-  }
+  section.user_info { margin-top: 20px; }
+
   section {
     padding: 10px 0;
     margin-top: 20px;
-    &:first-child {
-      border: 0;
-      padding-top: 0;
-    }
-    span {
-      display: block;
-      margin-bottom: 3px;
-      line-height: 1;
-    }
-    h1 {
-      font-size: 1.4em;
-      text-align: left;
-      letter-spacing: -1px;
-      margin-bottom: 3px;
-      margin-top: 0px;
-    }
+
+    &:first-child { border: 0; padding-top: 0; }
+
+    span { display: block; margin-bottom: 3px; line-height: 1; }
+
+    h1 { font-size: 1.4em; text-align: left; letter-spacing: -1px; margin: 0 0 3px 0; }
   }
 }
 
-.gravatar {
-  float: left;
-  margin-right: 10px;
+.gravatar { float: left; margin-right: 10px; }
+.gravatar_edit { margin-top: 15px; }
+
+/* ==========================
+   BODY 全体調整（navbar fixed-top 対応）
+   ========================== */
+body {
+  padding-top: 120px; /* navbar 高さ分 + 余裕 */
 }
 
-.gravatar_edit {
-  margin-top: 15px;
+body.home-page {
+  padding-top: 0; /* home ページだけ余白不要 */
+}
+
+/* ==========================
+   HOME PAGE
+   ========================== */
+.home-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-image: url('home.jpeg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  color: black;
+
+  .hero-content-wrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .hero-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    color: black;
+    text-align: center;
+  }
+
+  .hero-content h1 { font-size: 2rem; }
+
+  .hero-content .btn {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    margin: 0 0.5rem;
+  }
+
+  @media (max-width: 768px) {
+    .hero-content-wrapper { height: 300px; }
+    .hero-content h1 { font-size: 1.5rem; }
+    .hero-content .btn {
+      font-size: 0.9rem;
+      padding: 0.4rem 0.8rem;
+      display: block;
+      margin: 0.5rem auto;
+    }
+  }
+
+  footer { margin-top: auto; } /* flex で下に固定 */
+}
+
+/* ==========================
+   OTHER PAGES (signup, about, etc.)
+   ========================== */
+.page-with-header {
+  /* body に padding-top を付与して navbar と被らない */
+  .container {
+    display: block;       /* flex 解除 */
+    min-height: auto;
+    width: 100%;
+    margin: 0 auto;
+    padding-top: 20px;    /* navbar 被り防止の余白 */
+  }
+
+  footer {
+    margin-top: 45px;     /* 通常の余白 */
+    width: 100%;
+    text-align: center;
+    padding: 1rem 0;
+  }
 }
