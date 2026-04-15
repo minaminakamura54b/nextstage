@@ -1,6 +1,8 @@
 class User < ApplicationRecord
-  attr_accessor :remember_token #get,setterを作成、メソッドの作成
+  attr_accessor :remember_token, :activation_token #get,setterを作成、メソッドの作成
     before_save {self.email = email.downcase}
+    before_save   :downcase_email
+    before_create :create_activation_digest
     #email は実際には self.email と同じく このインスタンスの email 属性 を指します。
 	#しかし代入するときは Ruby は単に email = … と書くとローカル変数を作る と解釈するので、
     #属性に代入したい場合は self.email = … と書く必要があります。
@@ -35,13 +37,43 @@ class User < ApplicationRecord
   end
 
     # 渡されたトークンがダイジェストと一致したらtrueを返す
-    def authenticated?(remember_token)
-      return false if remember_digest.nil? #連続した２回のログアウトの阻止
-      BCrypt::Password.new(remember_digest).is_password?(remember_token)
-    end #(BCrypt::Password.new)これをすることでcookiesの平文と比較することができる
+    #def authenticated?(remember_token)
+      #return false if remember_digest.nil? #連続した２回のログアウトの阻止
+      #BCrypt::Password.new(remember_digest).is_password?(remember_token)
+     #(BCrypt::Password.new)これをすることでcookiesの平文と比較することができる
+
+    # 渡されたトークンがダイジェストと一致したらtrueを返す
+  def authenticated?(attribute, token)
+    digest = send("#{attribute}_digest")
+    return false if digest.nil?
+    BCrypt::Password.new(digest).is_password?(token)
+  end
 
   def forget
     update_attribute(:remember_digest, nil)
   end
 
+  # アカウントを有効にする
+  def activate
+    update_attribute(:activated,    true)
+    update_attribute(:activated_at, Time.zone.now)
+  end
+
+  # 有効化用のメールを送信する
+  def send_activation_email
+    UserMailer.account_activation(self).deliver_now
+  end
+
+
+  private
+
+  def downcase_email
+    self.email = email.downcase
+  end
+
+  # 有効化トークンとダイジェストを作成および代入する
+  def create_activation_digest
+    self.activation_token  = User.new_token
+    self.activation_digest = User.digest(activation_token)
+  end
 end
