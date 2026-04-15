@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "sandbox71042557be214572950aee1fb345be83.mailgun.org"
+  default from: "noreply@nextstage-w5ps.onrender.com"
   layout "mailer"
 end
