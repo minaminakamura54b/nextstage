@@ -1,0 +1,9 @@
+<% if @feed_items.any? %>
+  <ol class="microposts">
+    <%= render @feed_items %>
+  </ol>
+
+  <div class="d-flex justify-content-center mt-3">
+    <%= will_paginate @feed_items, class: "pagination" %>
+  </div>
+<% end %>

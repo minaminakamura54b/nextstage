@@ -1,12 +1,15 @@
-<% if @user.errors.any? %>
-  <div id="error_explanation">
-    <div class="alert alert-danger">
-      The form contains <%= pluralize(@user.errors.count, "error") %>.
-    </div>
-    <ul>
-    <% @user.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
+<% if object.errors.any? %>
+  <div class="alert alert-danger">
+
+    <h5 class="mb-2">
+      <%= pluralize(object.errors.count, "error") %> prohibited this form from being saved:
+    </h5>
+
+    <ul class="mb-0">
+      <% object.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
     </ul>
+
   </div>
 <% end %>

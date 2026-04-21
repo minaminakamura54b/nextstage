@@ -1,0 +1,49 @@
+<li id="micropost-<%= micropost.id %>" class="list-group-item border-0 px-0">
+
+  <div class="card shadow-sm mb-3">
+    <div class="card-body">
+
+      <!-- ユーザー情報 -->
+      <div class="d-flex align-items-center mb-2">
+        <%= link_to gravatar_for(micropost.user, size: 50), micropost.user, class: "me-2" %>
+
+        <div>
+          <strong>
+            <%= link_to micropost.user.name, micropost.user, class: "text-decoration-none text-dark" %>
+          </strong>
+
+          <div class="text-muted small">
+            <%= time_ago_in_words(micropost.created_at) %> ago
+          </div>
+        </div>
+      </div>
+
+      <!-- 投稿内容 -->
+      <p class="mb-2">
+        <%= micropost.content %>
+        <% if micropost.image.attached? %>
+          <% micropost.image.each do |img| %>
+          <%= image_tag img.variant(resize_to_limit: [300, 300]),
+                  class: "img-fluid rounded mb-2" %>
+          <% end %>
+        <% end %>
+    </span>
+      </p>
+
+      <!-- 削除ボタン（ここに追加） -->
+      <% if current_user?(micropost.user) %>
+        <div class="text-end">
+          <%= link_to "Delete",
+                      micropost,
+                      data: {
+                        turbo_method: :delete,
+                        turbo_confirm: "You sure?"
+                      },
+                      class: "btn btn-sm btn-outline-danger" %>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+
+</li>

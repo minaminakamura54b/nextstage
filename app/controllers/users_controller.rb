@@ -10,6 +10,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @microposts = @user.microposts.paginate(page: params[:page])
   end
 
   def index
@@ -54,13 +55,6 @@ class UsersController < ApplicationController
                                    :password_confirmation)
     end
 
-    def logged_in_user
-      unless logged_in?
-        store_location
-        flash[:danger] = "Please log in"
-        redirect_to login_url, status: :see_other
-      end
-    end
 
     def correct_user
       @user = User.find(params[:id])

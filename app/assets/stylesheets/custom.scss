@@ -67,7 +67,7 @@ body {
 }
 
 body.home-page {
-  padding-top: 0; /* home ページだけ余白不要 */
+  padding-top: 200; /* home ページだけ余白不要 */
 }
 
 /* ==========================
@@ -145,4 +145,79 @@ body.home-page {
     text-align: center;
     padding: 1rem 0;
   }
+}
+
+/* microposts */
+
+.microposts {
+  list-style: none;
+  padding: 0;
+}
+
+.microposts li {
+  padding: 12px 0;
+  border-top: 1px solid #e8e8e8;
+}
+
+/* ユーザー名 */
+.microposts .user {
+  font-weight: 600;
+}
+
+/* 投稿内容 */
+.microposts .content {
+  display: block;
+  margin-left: 60px;
+}
+
+/* 画像 */
+.microposts .content img {
+  display: block;
+  max-width: 100%;
+  border-radius: 8px;
+  margin-top: 5px;
+}
+
+/* 時間 */
+.microposts .timestamp {
+  color: #6c757d; /* Bootstrapのtext-muted */
+  font-size: 0.85rem;
+  margin-left: 60px;
+}
+
+/* アイコン */
+.microposts .gravatar {
+  float: left;
+  margin-right: 10px;
+  margin-top: 5px;
+  border-radius: 50%;
+}
+
+/* textarea */
+aside textarea {
+  height: 100px;
+  margin-bottom: 5px;
+}
+
+/* 画像アップロード */
+span.image {
+  margin-top: 10px;
+}
+
+span.image input {
+  border: 0;
+}
+
+.pagination {
+  justify-content: center;
+}
+
+.pagination li {
+  margin: 0 2px;
+}
+
+.pagination li a,
+.pagination li span {
+  border-radius: 6px;
+  padding: 6px 12px;
 }

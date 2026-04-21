@@ -1,11 +1,48 @@
 <% provide(:title, @user.name) %>
-<div class="row">
-  <aside class="col-md-4">
-    <section class="user_info">
-      <h1>
-        <%= gravatar_for @user %>
-        <%= @user.name %>
-      </h1>
-    </section>
-  </aside>
+
+<div class="container mt-4">
+  <div class="row">
+
+    <!-- 左：ユーザー情報 -->
+    <aside class="col-md-4 mb-4">
+      <div class="card shadow-sm text-center p-4">
+        <%= gravatar_for @user, size: 100, class: "rounded-circle mb-3" %>
+
+        <h4 class="mb-1"><%= @user.name %></h4>
+
+        <p class="text-muted small">
+          <%= @user.microposts.count %> posts
+        </p>
+
+        <% if current_user?(@user) %>
+          <%= link_to "Edit profile", edit_user_path(@user), class: "btn btn-outline-secondary btn-sm mt-2" %>
+        <% end %>
+      </div>
+    </aside>
+
+    <!-- 右：投稿一覧 -->
+    <div class="col-md-8">
+
+      <% if @microposts.any? %>
+        <h5 class="mb-3 fw-bold">
+          Microposts
+        </h5>
+
+        <div class="microposts">
+          <%= render @microposts %>
+        </div>
+
+        <div class="mt-4">
+          <%= will_paginate @microposts, class: "pagination justify-content-center" %>
+        </div>
+
+      <% else %>
+        <div class="text-center text-muted mt-5">
+          <p>No posts yet.</p>
+        </div>
+      <% end %>
+
+    </div>
+
+  </div>
 </div>

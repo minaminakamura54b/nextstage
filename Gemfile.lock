@@ -46,6 +46,11 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
+    active_storage_validations (0.9.8)
+      activejob (>= 5.2.0)
+      activemodel (>= 5.2.0)
+      activestorage (>= 5.2.0)
+      activesupport (>= 5.2.0)
     activejob (7.0.4.3)
       activesupport (= 7.0.4.3)
       globalid (>= 0.3.6)
@@ -70,10 +75,30 @@ GEM
       public_suffix (>= 2.0.2, < 8.0)
     ansi (1.6.0)
     ast (2.4.3)
+    aws-eventstream (1.4.0)
+    aws-partitions (1.1240.0)
+    aws-sdk-core (3.245.0)
+      aws-eventstream (~> 1, >= 1.3.0)
+      aws-partitions (~> 1, >= 1.992.0)
+      aws-sigv4 (~> 1.9)
+      base64
+      bigdecimal
+      jmespath (~> 1, >= 1.6.1)
+      logger
+    aws-sdk-kms (1.123.0)
+      aws-sdk-core (~> 3, >= 3.244.0)
+      aws-sigv4 (~> 1.5)
+    aws-sdk-s3 (1.114.0)
+      aws-sdk-core (~> 3, >= 3.127.0)
+      aws-sdk-kms (~> 1)
+      aws-sigv4 (~> 1.4)
+    aws-sigv4 (1.12.1)
+      aws-eventstream (~> 1, >= 1.0.2)
     backport (1.2.0)
     base64 (0.3.0)
     bcrypt (3.1.18)
     benchmark (0.5.0)
+    bigdecimal (4.1.2)
     bindex (0.8.1)
     bootsnap (1.16.0)
       msgpack (~> 1.2)
@@ -130,6 +155,9 @@ GEM
       minitest (>= 3.0)
     i18n (1.14.8)
       concurrent-ruby (~> 1.0)
+    image_processing (1.14.0)
+      mini_magick (>= 4.9.5, < 6)
+      ruby-vips (>= 2.0.17, < 3)
     importmap-rails (1.1.5)
       actionpack (>= 6.0.0)
       railties (>= 6.0.0)
@@ -141,6 +169,7 @@ GEM
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
+    jmespath (1.6.2)
     json (2.19.3)
     kramdown (2.5.2)
       rexml (>= 3.4.4)
@@ -166,6 +195,8 @@ GEM
     marcel (1.1.0)
     matrix (0.4.3)
     method_source (1.1.0)
+    mini_magick (5.3.1)
+      logger
     mini_mime (1.1.5)
     minitest (5.18.0)
     minitest-reporters (1.6.0)
@@ -293,6 +324,9 @@ GEM
       parser (>= 3.3.7.2)
       prism (~> 1.7)
     ruby-progressbar (1.13.0)
+    ruby-vips (2.3.0)
+      ffi (~> 1.12)
+      logger
     rubyzip (2.4.1)
     sassc (2.4.0)
       ffi (~> 1.9)
@@ -391,16 +425,19 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
+  active_storage_validations (= 0.9.8)
+  aws-sdk-s3 (= 1.114.0)
   bcrypt (= 3.1.18)
   bootsnap (= 1.16.0)
   bootstrap (~> 5.3.8)
-  bootstrap-will_paginate (= 1.0.0)
+  bootstrap-will_paginate
   capybara (= 3.38.0)
   concurrent-ruby (= 1.3.4)
   debug (= 1.7.1)
   faker (= 2.21.0)
   guard (= 2.18.0)
   guard-minitest (= 2.4.6)
+  image_processing
   importmap-rails (= 1.1.5)
   irb (= 1.10.0)
   jbuilder (= 2.11.5)
@@ -430,6 +467,7 @@ CHECKSUMS
   actionpack (7.0.4.3) sha256=adf30cb429332085b25509ec17541d9108468cb3246eae8f4e0bb0e9268660b1
   actiontext (7.0.4.3) sha256=8f21e30c0eec9ce9c9277388efd836b53a3955e4756efd226e4b8c644960065f
   actionview (7.0.4.3) sha256=df24eeab4db187c791218039e1c3ccbf84e765b7887fdb08628bb98ff51120c1
+  active_storage_validations (0.9.8) sha256=01bc78f6bdde9e7a623580ee2f181d8bf35c0d28a49f83f14f92ae0a96106259
   activejob (7.0.4.3) sha256=7c74f0fb4e7a8abfbc91a9375c4da4d988c08918c78d5e2d77b44f8aa4e3aa23
   activemodel (7.0.4.3) sha256=3b511cfc2f37fca76eb25ba191d302f6dd5afd12ef80fb897b1f99d55ed7b07a
   activerecord (7.0.4.3) sha256=bb91f8c1ce5de7008d6190a50d899e9117b0b638df44b298246be92f224a8b07
@@ -438,10 +476,17 @@ CHECKSUMS
   addressable (2.8.9) sha256=cc154fcbe689711808a43601dee7b980238ce54368d23e127421753e46895485
   ansi (1.6.0) sha256=ac9ea0c0ea8d32fb4e271348e609963ac78882f34b73836c2a02b3622e666658
   ast (2.4.3) sha256=954615157c1d6a382bc27d690d973195e79db7f55e9765ac7c481c60bdb4d383
+  aws-eventstream (1.4.0) sha256=116bf85c436200d1060811e6f5d2d40c88f65448f2125bc77ffce5121e6e183b
+  aws-partitions (1.1240.0) sha256=b885b21712fdad699c56a28434756ed27f1389b07231320796dda9e7551de4a7
+  aws-sdk-core (3.245.0) sha256=94f43b40508c346f1625b3d31f811c5841b667c92de14d5fb3c473b1284cb4ad
+  aws-sdk-kms (1.123.0) sha256=d405f37e82f8fa32045ca8980be266c0b45b37aaf2012afe0254321a1e811f20
+  aws-sdk-s3 (1.114.0) sha256=ce0f71df1a7b0fb1f88d40a70636ef1a9b08e69fb560694c5dab3f4ac7efcde4
+  aws-sigv4 (1.12.1) sha256=6973ff95cb0fd0dc58ba26e90e9510a2219525d07620c8babeb70ef831826c00
   backport (1.2.0) sha256=912c7dfdd9ee4625d013ddfccb6205c3f92da69a8990f65c440e40f5b2fc7f75
   base64 (0.3.0) sha256=27337aeabad6ffae05c265c450490628ef3ebd4b67be58257393227588f5a97b
   bcrypt (3.1.18) sha256=154de0b0b089e56d5980c5037ad85fc9554cfbf4996538673c1ddbc9b61b1f11
   benchmark (0.5.0) sha256=465df122341aedcb81a2a24b4d3bd19b6c67c1530713fd533f3ff034e419236c
+  bigdecimal (4.1.2) sha256=53d217666027eab4280346fba98e7d5b66baaae1b9c3c1c0ffe89d48188a3fbd
   bindex (0.8.1) sha256=7b1ecc9dc539ed8bccfc8cb4d2732046227b09d6f37582ff12e50a5047ceb17e
   bootsnap (1.16.0) sha256=f87410c00f69cd84a6e72a6c4bdba733f800d80d934f4315849d18ca9f288fed
   bootstrap (5.3.8) sha256=1c23b06df24ec28a0058ad90a0da93e260d2c0a5c453d7087f6bad428464742f
@@ -471,11 +516,13 @@ CHECKSUMS
   guard-compat (1.2.1) sha256=3ad21ab0070107f92edfd82610b5cdc2fb8e368851e72362ada9703443d646fe
   guard-minitest (2.4.6) sha256=d89e83d029447c13b191599085d24b6e2fe61e402d275e46491cd3e82f561572
   i18n (1.14.8) sha256=285778639134865c5e0f6269e0b818256017e8cde89993fdfcbfb64d088824a5
+  image_processing (1.14.0) sha256=754cc169c9c262980889bec6bfd325ed1dafad34f85242b5a07b60af004742fb
   importmap-rails (1.1.5) sha256=a53cf0257713221c0638c9b0039d0fa2d66ae04a52fb6164c30d29f83f8757fd
   io-console (0.8.2) sha256=d6e3ae7a7cc7574f4b8893b4fca2162e57a825b223a177b7afa236c5ef9814cc
   irb (1.10.0) sha256=b691c9308fbe1f9467e5518e3a7a1467b8cd2f0374994b0106cb4969151d0a16
   jaro_winkler (1.7.0) sha256=8daa05a5cd05bf7d27c1c65caa8ab0d47c05419d80210feaa17126db24044ada
   jbuilder (2.11.5) sha256=ea6234b334f4afc9205eaa136729da2904731ca01ff05d4db3173b70ebeba8c0
+  jmespath (1.6.2) sha256=238d774a58723d6c090494c8879b5e9918c19485f7e840f2c1c7532cf84ebcb1
   json (2.19.3) sha256=289b0bb53052a1fa8c34ab33cc750b659ba14a5c45f3fcf4b18762dc67c78646
   kramdown (2.5.2) sha256=1ba542204c66b6f9111ff00dcc26075b95b220b07f2905d8261740c82f7f02fa
   kramdown-parser-gfm (1.1.0) sha256=fb39745516427d2988543bf01fc4cf0ab1149476382393e0e9c48592f6581729
@@ -489,6 +536,7 @@ CHECKSUMS
   marcel (1.1.0) sha256=fdcfcfa33cc52e93c4308d40e4090a5d4ea279e160a7f6af988260fa970e0bee
   matrix (0.4.3) sha256=a0d5ab7ddcc1973ff690ab361b67f359acbb16958d1dc072b8b956a286564c5b
   method_source (1.1.0) sha256=181301c9c45b731b4769bc81e8860e72f9161ad7d66dd99103c9ab84f560f5c5
+  mini_magick (5.3.1) sha256=29395dfd76badcabb6403ee5aff6f681e867074f8f28ce08d78661e9e4a351c4
   mini_mime (1.1.5) sha256=8681b7e2e4215f2a159f9400b5816d85e9d8c6c6b491e96a12797e798f8bccef
   minitest (5.18.0) sha256=06f43aa0692ce3acf19cb5bc539ad2c6095ca3d2c7e5fbafc58a7d847e898745
   minitest-reporters (1.6.0) sha256=2429bc38cd2cfb97ea2d3443ae2928c1ea59e912e8e90a6fcacca358c77ffcbb
@@ -541,6 +589,7 @@ CHECKSUMS
   rubocop (1.86.0) sha256=4ff1186fe16ebe9baff5e7aad66bb0ad4cabf5cdcd419f773146dbba2565d186
   rubocop-ast (1.49.1) sha256=4412f3ee70f6fe4546cc489548e0f6fcf76cafcfa80fa03af67098ffed755035
   ruby-progressbar (1.13.0) sha256=80fc9c47a9b640d6834e0dc7b3c94c9df37f08cb072b7761e4a71e22cff29b33
+  ruby-vips (2.3.0) sha256=e685ec02c13969912debbd98019e50492e12989282da5f37d05f5471442f5374
   rubyzip (2.4.1) sha256=8577c88edc1fde8935eb91064c5cb1aef9ad5494b940cf19c775ee833e075615
   sassc (2.4.0) sha256=4c60a2b0a3b36685c83b80d5789401c2f678c1652e3288315a1551d811d9f83e
   sassc-rails (2.1.2) sha256=5f4fdf3881fc9bdc8e856ffbd9850d70a2878866feae8114aa45996179952db5

@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+
+  has_many :microposts, dependent: :destroy #dependent: :destroyというオプションを使うと、ユーザーが削除されたときに、そのユーザーに紐付いた、つまりそのユーザーが投稿したマイクロポストも一緒に削除されるようになります。
   attr_accessor :remember_token, :activation_token, :reset_token #get,setterを作成、メソッドの作成
     before_save {self.email = email.downcase}
     before_save   :downcase_email
@@ -78,6 +80,12 @@ class User < ApplicationRecord
 
   def password_reset_expired?
     reset_sent_at < 2.hours.ago
+  end
+
+  # 試作feedの定義
+  # 完全な実装は次章の「ユーザーをフォローする」を参照
+  def feed
+    Micropost.where("user_id = ?", id)
   end
 
 
